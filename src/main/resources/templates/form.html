@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${tittle}"></div>
+			<div class="card-body">
+			<div th:text="${msg}"></div>
+				<div th:object="${expression}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+						role="alert">
+						<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+
+				<form th:action="@{/form}" th:object="${expression}" method="post">
+					<div class="form-group row">
+						<label for="english" class="col-sm-2 col-form-label">English</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{english}" class="form-control"
+								th:errorclass="'form-control alert-danger'" th:if="${edit}" readonly="readonly"/> 
+							<input type="text" th:field="*{english}" class="form-control"
+								th:errorclass="'form-control alert-danger'" th:if="${create}"/> 
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="spanish" class="col-sm-2 col-form-label">Spanish</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{spanish}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('spanish')}" th:errors="*{spanish}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${button}"
+								class="btn btn-success btn-xs" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
