@@ -74,7 +74,7 @@ public class ExpressionController {
 		         
 					expression.subscribe(flux -> log.info(flux.toString()),error -> log.error(error.getMessage()),new Runnable() {
 						public void run() {
-							log.info("flux edit controller precesed suscesfully...");
+							log.info("flux edit controller procesed suscesfully...");
 						}
 					});
 		model.put("expression", modelExpression);
